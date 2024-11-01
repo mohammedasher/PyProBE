@@ -1,0 +1,1346 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyprobe.filters module &#8212; PyProBE  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/pyprobe.filters';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyprobe.plot module" href="pyprobe.plot.html" />
+    <link rel="prev" title="pyprobe.dashboard module" href="pyprobe.dashboard.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyProBE  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer_guide/developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    pyprobe
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer_guide/developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    pyprobe
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyprobe.html">pyprobe package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.analysis.html">pyprobe.analysis package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.cyclers.html">pyprobe.cyclers package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.cell.html">pyprobe.cell module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.dashboard.html">pyprobe.dashboard module</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyprobe.filters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.plot.html">pyprobe.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.rawdata.html">pyprobe.rawdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.readme_processor.html">pyprobe.readme_processor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.result.html">pyprobe.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.typing.html">pyprobe.typing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.units.html">pyprobe.units module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.utils.html">pyprobe.utils module</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">pyprobe</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="pyprobe.html" class="nav-link">pyprobe package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pyprobe.filt...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-pyprobe.filters">
+<span id="pyprobe-filters-module"></span><h1>pyprobe.filters module<a class="headerlink" href="#module-pyprobe.filters" title="Link to this heading">#</a></h1>
+<p>A module for the filtering classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.filters.get_cycle_column">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.filters.</span></span><span class="sig-name descname"><span class="pre">get_cycle_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.get_cycle_column" title="Link to this definition">#</a></dt>
+<dd><p>Adds a cycle column to the data.</p>
+<p>If cycle details have been provided in the README, the cycle column will be created
+by checking for the last step of the cycle. For nested cycles, the “outer” cycle
+will be created first. Subsequent filtering with the cycle method will then allow
+for filtering on the “inner” cycles.</p>
+<p>If no cycle details have been provided, the cycle column will be created by
+identifying the last step of the cycle by checking for a decrease in the step
+number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> (<em>ExperimentOrCycleType</em>) – The experiment or cycle object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data with a cycle column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame | pl.LazyFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.filters.</span></span><span class="sig-name descname"><span class="pre">Procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_definitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_descriptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readme_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyprobe.rawdata.html#pyprobe.rawdata.RawData" title="pyprobe.rawdata.RawData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawData</span></code></a></p>
+<p>A class for a procedure in a battery experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>base_dataframe</strong> (<em>LazyFrame</em><em> | </em><em>DataFrame</em>)</p></li>
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p></li>
+<li><p><strong>column_definitions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>step_descriptions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>readme_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>cycle_info</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.readme_dict">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readme_dict</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#pyprobe.filters.Procedure.readme_dict" title="Link to this definition">#</a></dt>
+<dd><p>A dictionary representing the data contained in the README yaml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_load_base_dataframe</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.cycle_info">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cycle_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyprobe.filters.Procedure.cycle_info" title="Link to this definition">#</a></dt>
+<dd><p>A list of tuples representing the cycle information from the README yaml file.</p>
+<p>The tuple format is
+<code class="code docutils literal notranslate"><span class="pre">(start</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">end</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">cycle</span> <span class="pre">count)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_load_base_dataframe</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">step_numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.step" title="Link to this definition">#</a></dt>
+<dd><p>Return a step object. Filters to a numerical condition on the Event column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>step_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of step indices or a range object.</p></li>
+<li><p><strong>condition</strong> (<em>pl.Expr</em><em>, </em><em>optional</em>) – A polars expression to filter the step before applying the numerical filter.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.cycle">
+<span class="sig-name descname"><span class="pre">cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">cycle_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.cycle" title="Link to this definition">#</a></dt>
+<dd><p>Return a cycle object. Filters on the Cycle column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToExperimentType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>cycle_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of cycle indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A cycle object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Cycle" title="pyprobe.filters.Cycle">Cycle</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">charge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.charge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>charge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.discharge">
+<span class="sig-name descname"><span class="pre">discharge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">discharge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.discharge" title="Link to this definition">#</a></dt>
+<dd><p>Return a discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>discharge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of discharge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.chargeordischarge">
+<span class="sig-name descname"><span class="pre">chargeordischarge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">chargeordischarge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.chargeordischarge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge or discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>chargeordischarge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge or discharge indices or a range
+object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge or discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.rest">
+<span class="sig-name descname"><span class="pre">rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rest_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.rest" title="Link to this definition">#</a></dt>
+<dd><p>Return a rest step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>rest_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of rest indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rest step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.constant_current">
+<span class="sig-name descname"><span class="pre">constant_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_current_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.constant_current" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant current step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant current indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant current step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.constant_voltage">
+<span class="sig-name descname"><span class="pre">constant_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_voltage_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.constant_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant voltage step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant voltage indices or a range object.</p></li>
+<li><p><strong>constant_voltage_numbers</strong> (<em>int</em><em> | </em><em>range</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant voltage step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.experiment">
+<span class="sig-name descname"><span class="pre">experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">experiment_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.experiment" title="Link to this definition">#</a></dt>
+<dd><p>Return an experiment object from the procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_names</strong> (<em>str</em>) – Variable-length argument list of experiment names.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An experiment object from the procedure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Experiment" title="pyprobe.filters.Experiment">Experiment</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.remove_experiment">
+<span class="sig-name descname"><span class="pre">remove_experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">experiment_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.remove_experiment" title="Link to this definition">#</a></dt>
+<dd><p>Remove an experiment from the procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_names</strong> (<em>str</em>) – Variable-length argument list of experiment names.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.experiment_names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">experiment_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyprobe.filters.Procedure.experiment_names" title="Link to this definition">#</a></dt>
+<dd><p>Return the names of the experiments in the procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The names of the experiments in the procedure.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.add_external_data">
+<span class="sig-name descname"><span class="pre">add_external_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">importing_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_column_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Date'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.add_external_data" title="Link to this definition">#</a></dt>
+<dd><p>Add data from another source to the procedure.</p>
+<p>The data must be timestamped, with a column that can be interpreted in
+DateTime format. The data will be interpolated to the procedure’s time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – The path to the external file.</p></li>
+<li><p><strong>importing_columns</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The columns to import from the external file. If a list, the columns
+will be imported as is. If a dict, the keys are the columns in the data
+you want to import and the values are the columns you want to rename
+them to.</p></li>
+<li><p><strong>date_column_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the date column in the external data. Defaults to “Date”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Procedure.load_external_file">
+<span class="sig-name descname"><span class="pre">load_external_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Procedure.load_external_file" title="Link to this definition">#</a></dt>
+<dd><p>Load an external file into a LazyFrame.</p>
+<p>Supported file types are CSV, Parquet, and Excel. For maximum performance,
+consider using Parquet files. If you have an Excel file, consider converting
+it to CSV before loading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – The path to the external file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>LazyFrame</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.filters.</span></span><span class="sig-name descname"><span class="pre">Experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_definitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_descriptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyprobe.rawdata.html#pyprobe.rawdata.RawData" title="pyprobe.rawdata.RawData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawData</span></code></a></p>
+<p>A class for an experiment in a battery experimental procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>base_dataframe</strong> (<em>LazyFrame</em><em> | </em><em>DataFrame</em>)</p></li>
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p></li>
+<li><p><strong>column_definitions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>step_descriptions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>cycle_info</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.cycle_info">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cycle_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyprobe.filters.Experiment.cycle_info" title="Link to this definition">#</a></dt>
+<dd><p>A list of tuples representing the cycle information from the README yaml file.</p>
+<p>The tuple format is
+<code class="code docutils literal notranslate"><span class="pre">(start</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">end</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">cycle</span> <span class="pre">count)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_load_base_dataframe</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">step_numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.step" title="Link to this definition">#</a></dt>
+<dd><p>Return a step object. Filters to a numerical condition on the Event column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>step_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of step indices or a range object.</p></li>
+<li><p><strong>condition</strong> (<em>pl.Expr</em><em>, </em><em>optional</em>) – A polars expression to filter the step before applying the numerical filter.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.cycle">
+<span class="sig-name descname"><span class="pre">cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">cycle_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.cycle" title="Link to this definition">#</a></dt>
+<dd><p>Return a cycle object. Filters on the Cycle column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToExperimentType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>cycle_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of cycle indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A cycle object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Cycle" title="pyprobe.filters.Cycle">Cycle</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">charge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.charge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>charge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.discharge">
+<span class="sig-name descname"><span class="pre">discharge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">discharge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.discharge" title="Link to this definition">#</a></dt>
+<dd><p>Return a discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>discharge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of discharge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.chargeordischarge">
+<span class="sig-name descname"><span class="pre">chargeordischarge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">chargeordischarge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.chargeordischarge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge or discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>chargeordischarge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge or discharge indices or a range
+object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge or discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.rest">
+<span class="sig-name descname"><span class="pre">rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rest_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.rest" title="Link to this definition">#</a></dt>
+<dd><p>Return a rest step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>rest_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of rest indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rest step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.constant_current">
+<span class="sig-name descname"><span class="pre">constant_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_current_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.constant_current" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant current step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant current indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant current step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Experiment.constant_voltage">
+<span class="sig-name descname"><span class="pre">constant_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_voltage_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Experiment.constant_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant voltage step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant voltage indices or a range object.</p></li>
+<li><p><strong>constant_voltage_numbers</strong> (<em>int</em><em> | </em><em>range</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant voltage step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.filters.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_definitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_descriptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyprobe.rawdata.html#pyprobe.rawdata.RawData" title="pyprobe.rawdata.RawData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawData</span></code></a></p>
+<p>A class for a cycle in a battery experimental procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>base_dataframe</strong> (<em>LazyFrame</em><em> | </em><em>DataFrame</em>)</p></li>
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p></li>
+<li><p><strong>column_definitions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>step_descriptions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>cycle_info</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.cycle_info">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cycle_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyprobe.filters.Cycle.cycle_info" title="Link to this definition">#</a></dt>
+<dd><p>A list of tuples representing the cycle information from the README yaml file.</p>
+<p>The tuple format is
+<code class="code docutils literal notranslate"><span class="pre">(start</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">end</span> <span class="pre">step</span> <span class="pre">(inclusive),</span> <span class="pre">cycle</span> <span class="pre">count)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_load_base_dataframe</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">step_numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.step" title="Link to this definition">#</a></dt>
+<dd><p>Return a step object. Filters to a numerical condition on the Event column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>step_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of step indices or a range object.</p></li>
+<li><p><strong>condition</strong> (<em>pl.Expr</em><em>, </em><em>optional</em>) – A polars expression to filter the step before applying the numerical filter.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">charge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.charge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>charge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.discharge">
+<span class="sig-name descname"><span class="pre">discharge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">discharge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.discharge" title="Link to this definition">#</a></dt>
+<dd><p>Return a discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>discharge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of discharge indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.chargeordischarge">
+<span class="sig-name descname"><span class="pre">chargeordischarge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">chargeordischarge_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.chargeordischarge" title="Link to this definition">#</a></dt>
+<dd><p>Return a charge or discharge step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>chargeordischarge_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of charge or discharge indices or a range
+object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A charge or discharge step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.rest">
+<span class="sig-name descname"><span class="pre">rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rest_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.rest" title="Link to this definition">#</a></dt>
+<dd><p>Return a rest step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>rest_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of rest indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rest step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.constant_current">
+<span class="sig-name descname"><span class="pre">constant_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_current_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.constant_current" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant current step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant current indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant current step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Cycle.constant_voltage">
+<span class="sig-name descname"><span class="pre">constant_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_voltage_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Cycle.constant_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant voltage step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant voltage indices or a range object.</p></li>
+<li><p><strong>constant_voltage_numbers</strong> (<em>int</em><em> | </em><em>range</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant voltage step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="pyprobe.filters.Step">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.filters.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_definitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_descriptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Step" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyprobe.rawdata.html#pyprobe.rawdata.RawData" title="pyprobe.rawdata.RawData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawData</span></code></a></p>
+<p>A class for a step in a battery experimental procedure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>base_dataframe</strong> (<em>LazyFrame</em><em> | </em><em>DataFrame</em>)</p></li>
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p></li>
+<li><p><strong>column_definitions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>step_descriptions</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Step.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">step_numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Step.step" title="Link to this definition">#</a></dt>
+<dd><p>Return a step object. Filters to a numerical condition on the Event column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>step_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of step indices or a range object.</p></li>
+<li><p><strong>condition</strong> (<em>pl.Expr</em><em>, </em><em>optional</em>) – A polars expression to filter the step before applying the numerical filter.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Step.constant_current">
+<span class="sig-name descname"><span class="pre">constant_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_current_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Step.constant_current" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant current step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant current indices or a range object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant current step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.filters.Step.constant_voltage">
+<span class="sig-name descname"><span class="pre">constant_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">constant_voltage_numbers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.filters.Step.constant_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return a constant voltage step object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<em>FilterToCycleType</em>) – A filter object that this method is called on.</p></li>
+<li><p><strong>constant_current_numbers</strong> (<em>int</em><em> | </em><em>range</em>) – Variable-length argument list of constant voltage indices or a range object.</p></li>
+<li><p><strong>constant_voltage_numbers</strong> (<em>int</em><em> | </em><em>range</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A constant voltage step object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.filters.Step" title="pyprobe.filters.Step">Step</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pyprobe.dashboard.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyprobe.dashboard module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyprobe.plot.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyprobe.plot module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.get_cycle_column"><code class="docutils literal notranslate"><span class="pre">get_cycle_column()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure"><code class="docutils literal notranslate"><span class="pre">Procedure</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.readme_dict"><code class="docutils literal notranslate"><span class="pre">Procedure.readme_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.cycle_info"><code class="docutils literal notranslate"><span class="pre">Procedure.cycle_info</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.step"><code class="docutils literal notranslate"><span class="pre">Procedure.step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.cycle"><code class="docutils literal notranslate"><span class="pre">Procedure.cycle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.charge"><code class="docutils literal notranslate"><span class="pre">Procedure.charge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.discharge"><code class="docutils literal notranslate"><span class="pre">Procedure.discharge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.chargeordischarge"><code class="docutils literal notranslate"><span class="pre">Procedure.chargeordischarge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.rest"><code class="docutils literal notranslate"><span class="pre">Procedure.rest()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.constant_current"><code class="docutils literal notranslate"><span class="pre">Procedure.constant_current()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.constant_voltage"><code class="docutils literal notranslate"><span class="pre">Procedure.constant_voltage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.experiment"><code class="docutils literal notranslate"><span class="pre">Procedure.experiment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.remove_experiment"><code class="docutils literal notranslate"><span class="pre">Procedure.remove_experiment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.experiment_names"><code class="docutils literal notranslate"><span class="pre">Procedure.experiment_names</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.add_external_data"><code class="docutils literal notranslate"><span class="pre">Procedure.add_external_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Procedure.load_external_file"><code class="docutils literal notranslate"><span class="pre">Procedure.load_external_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment"><code class="docutils literal notranslate"><span class="pre">Experiment</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.cycle_info"><code class="docutils literal notranslate"><span class="pre">Experiment.cycle_info</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.step"><code class="docutils literal notranslate"><span class="pre">Experiment.step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.cycle"><code class="docutils literal notranslate"><span class="pre">Experiment.cycle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.charge"><code class="docutils literal notranslate"><span class="pre">Experiment.charge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.discharge"><code class="docutils literal notranslate"><span class="pre">Experiment.discharge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.chargeordischarge"><code class="docutils literal notranslate"><span class="pre">Experiment.chargeordischarge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.rest"><code class="docutils literal notranslate"><span class="pre">Experiment.rest()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.constant_current"><code class="docutils literal notranslate"><span class="pre">Experiment.constant_current()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Experiment.constant_voltage"><code class="docutils literal notranslate"><span class="pre">Experiment.constant_voltage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle"><code class="docutils literal notranslate"><span class="pre">Cycle</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.cycle_info"><code class="docutils literal notranslate"><span class="pre">Cycle.cycle_info</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.step"><code class="docutils literal notranslate"><span class="pre">Cycle.step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.charge"><code class="docutils literal notranslate"><span class="pre">Cycle.charge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.discharge"><code class="docutils literal notranslate"><span class="pre">Cycle.discharge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.chargeordischarge"><code class="docutils literal notranslate"><span class="pre">Cycle.chargeordischarge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.rest"><code class="docutils literal notranslate"><span class="pre">Cycle.rest()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.constant_current"><code class="docutils literal notranslate"><span class="pre">Cycle.constant_current()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Cycle.constant_voltage"><code class="docutils literal notranslate"><span class="pre">Cycle.constant_voltage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Step"><code class="docutils literal notranslate"><span class="pre">Step</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Step.step"><code class="docutils literal notranslate"><span class="pre">Step.step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Step.constant_current"><code class="docutils literal notranslate"><span class="pre">Step.constant_current()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.filters.Step.constant_voltage"><code class="docutils literal notranslate"><span class="pre">Step.constant_voltage()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/pyprobe.filters.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Thomas Holland, Electrochemical Science and Engineering Group, Imperial College London.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

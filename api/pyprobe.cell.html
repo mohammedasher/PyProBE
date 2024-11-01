@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyprobe.cell module &#8212; PyProBE  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/pyprobe.cell';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyprobe.dashboard module" href="pyprobe.dashboard.html" />
+    <link rel="prev" title="pyprobe.cyclers.neware module" href="pyprobe.cyclers.neware.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyProBE  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer_guide/developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    pyprobe
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer_guide/developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    pyprobe
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyprobe.html">pyprobe package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.analysis.html">pyprobe.analysis package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.cyclers.html">pyprobe.cyclers package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyprobe.cell module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.dashboard.html">pyprobe.dashboard module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.filters.html">pyprobe.filters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.plot.html">pyprobe.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.rawdata.html">pyprobe.rawdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.readme_processor.html">pyprobe.readme_processor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.result.html">pyprobe.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.typing.html">pyprobe.typing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.units.html">pyprobe.units module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyprobe.utils.html">pyprobe.utils module</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">pyprobe</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="pyprobe.html" class="nav-link">pyprobe package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pyprobe.cell module</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-pyprobe.cell">
+<span id="pyprobe-cell-module"></span><h1>pyprobe.cell module<a class="headerlink" href="#module-pyprobe.cell" title="Link to this heading">#</a></h1>
+<p>Module for the Cell class.</p>
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.cell.</span></span><span class="sig-name descname"><span class="pre">Cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">procedure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>A class for a cell in a battery experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#pyprobe.cell.Cell.check_and_set_name" title="pyprobe.cell.Cell.check_and_set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_and_set_name</span></code></a> » <a class="reference internal" href="#pyprobe.cell.Cell.info" title="pyprobe.cell.Cell.info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">info</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p></li>
+<li><p><strong>procedure</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="pyprobe.filters.html#pyprobe.filters.Procedure" title="pyprobe.filters.Procedure"><em>Procedure</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.info">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#pyprobe.cell.Cell.info" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary containing information about the cell.
+The dictionary must contain a ‘Name’ field, other information may include
+channel number or other rig information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#pyprobe.cell.Cell.check_and_set_name" title="pyprobe.cell.Cell.check_and_set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_and_set_name</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.procedure">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">procedure</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyprobe.filters.html#pyprobe.filters.Procedure" title="pyprobe.filters.Procedure"><span class="pre">Procedure</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">[Optional]</span></em><a class="headerlink" href="#pyprobe.cell.Cell.procedure" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary containing the procedures that have been run on the cell.</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.check_and_set_name">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_and_set_name</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#pyprobe.cell.Cell.info" title="pyprobe.cell.Cell.info"><em class="xref py py-obj"><span class="pre">info</span></em></a><a class="headerlink" href="#pyprobe.cell.Cell.check_and_set_name" title="Link to this definition">#</a></dt>
+<dd><p>Validate the <cite>info</cite> field.</p>
+<p>Checks that a <cite>Name</cite> field is present in the <cite>info</cite> dictionary, if not it is
+set to ‘Default Name’. If the <cite>color</cite> field is not present, a color is
+generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>Dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Dict</em>[str, str | int | float | <em>Dict</em>[<em>Any</em>, <em>Any</em>] | None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.process_cycler_file">
+<span class="sig-name descname"><span class="pre">process_cycler_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cycler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell.process_cycler_file" title="Link to this definition">#</a></dt>
+<dd><p>Convert cycler file into PyProBE format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cycler</strong> (<em>str</em>) – The cycler used to produce the data. Available cyclers are:
+- ‘neware’
+- ‘biologic’
+- ‘biologic_MB’ (for Modulo Bat Biologic data)</p></li>
+<li><p><strong>folder_path</strong> (<em>str</em>) – The path to the folder containing the data file.</p></li>
+<li><p><strong>input_filename</strong> (<em>str</em><em> | </em><em>function</em>) – A filename string or a function to generate the file name for cycler
+data.</p></li>
+<li><p><strong>output_filename</strong> (<em>str</em><em> | </em><em>function</em>) – A filename string or a function to generate the file name for PyProBE
+data.</p></li>
+<li><p><strong>filename_inputs</strong> (<em>list</em>) – The list of inputs to input_filename and output_filename, if they are
+functions. These must be keys of the cell info.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.process_generic_file">
+<span class="sig-name descname"><span class="pre">process_generic_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell.process_generic_file" title="Link to this definition">#</a></dt>
+<dd><p>Convert generic file into PyProBE format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_path</strong> (<em>str</em>) – The path to the folder containing the data file.</p></li>
+<li><p><strong>input_filename</strong> (<em>str</em><em> | </em><em>function</em>) – A filename string or a function to generate the file name for the
+generic data.</p></li>
+<li><p><strong>output_filename</strong> (<em>str</em><em> | </em><em>function</em>) – A filename string or a function to generate the file name for PyProBE
+data.</p></li>
+<li><p><strong>column_dict</strong> (<em>dict</em>) – A dictionary mapping the column names in the generic file to the PyProBE
+column names. The keys of the dictionary are the cycler column names and
+the values are the PyProBE column names. You must use asterisks to
+indicate the units of the columns.
+E.g. <code class="code docutils literal notranslate"><span class="pre">{&quot;V</span> <span class="pre">(*)&quot;:</span> <span class="pre">&quot;Voltage</span> <span class="pre">[*]&quot;}</span></code>.</p></li>
+<li><p><strong>filename_inputs</strong> (<em>list</em>) – The list of inputs to input_filename and output_filename.
+These must be keys of the cell info.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.add_procedure">
+<span class="sig-name descname"><span class="pre">add_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">procedure_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readme_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'README.yaml'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell.add_procedure" title="Link to this definition">#</a></dt>
+<dd><p>Add data in a PyProBE-format parquet file to the procedure dict of the cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>procedure_name</strong> (<em>str</em>) – A name to give the procedure. This will be used when calling
+<code class="code docutils literal notranslate"><span class="pre">cell.procedure[procedure_name]</span></code>.</p></li>
+<li><p><strong>folder_path</strong> (<em>str</em>) – The path to the folder containing the data file.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em> | </em><em>function</em>) – A filename string or a function to generate the file name for PyProBE
+data.</p></li>
+<li><p><strong>filename_inputs</strong> (<em>Optional</em><em>[</em><em>list</em><em>]</em>) – The list of inputs to filename_function. These must be keys of the cell
+info.</p></li>
+<li><p><strong>readme_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the readme file. Defaults to “README.yaml”. It is assumed
+that the readme file is in the same folder as the data file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.import_pybamm_solution">
+<span class="sig-name descname"><span class="pre">import_pybamm_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">procedure_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pybamm_solutions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_data_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell.import_pybamm_solution" title="Link to this definition">#</a></dt>
+<dd><p>Import a PyBaMM solution object into a procedure of the cell.</p>
+<p>Filtering a PyBaMM solution object by cycle and step reflects the behaviour of
+the <code class="code docutils literal notranslate"><span class="pre">cycles</span></code> and <code class="code docutils literal notranslate"><span class="pre">steps</span></code> dictionaries of the PyBaMM solution object.</p>
+<p>Multiple experiments can be imported into the same procedure. This is achieved
+by providing multiple solution objects and experiment names.</p>
+<p>This method optionally writes the data to a parquet file, if a data path is
+provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>procedure_name</strong> (<em>str</em>) – A name to give the procedure. This will be used when calling
+<code class="code docutils literal notranslate"><span class="pre">cell.procedure[procedure_name]</span></code>.</p></li>
+<li><p><strong>pybamm_solutions</strong> (<em>list</em><em> or </em><em>pybamm_solution</em>) – A list of PyBaMM solution objects or a single PyBaMM solution object.</p></li>
+<li><p><strong>experiment_names</strong> (<em>list</em><em> or </em><em>str</em>) – A list of experiment names or a single experiment name to assign to the
+PyBaMM solution object.</p></li>
+<li><p><strong>output_data_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path to write the parquet file. Defaults to None.</p></li>
+<li><p><strong>optional_variables</strong> (<em>list</em><em>, </em><em>optional</em>) – A list of variables to import from the PyBaMM solution object in
+addition to the PyProBE required variables. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.cell.Cell.archive">
+<span class="sig-name descname"><span class="pre">archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.Cell.archive" title="Link to this definition">#</a></dt>
+<dd><p>Archive the cell object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The path to the archive directory or zip file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.cell.load_archive">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.cell.</span></span><span class="sig-name descname"><span class="pre">load_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.load_archive" title="Link to this definition">#</a></dt>
+<dd><p>Load a cell object from an archive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The path to the archive directory.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cell object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyprobe.cell.Cell" title="pyprobe.cell.Cell">Cell</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.cell.make_cell_list">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.cell.</span></span><span class="sig-name descname"><span class="pre">make_cell_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worksheet_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.cell.make_cell_list" title="Link to this definition">#</a></dt>
+<dd><p>Function to make a list of cell objects from a record of tests in Excel format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record_filepath</strong> (<em>str</em>) – The path to the experiment record .xlsx file.</p></li>
+<li><p><strong>worksheet_name</strong> (<em>str</em>) – The worksheet name to read from the record.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The list of cell objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pyprobe.cyclers.neware.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyprobe.cyclers.neware module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyprobe.dashboard.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyprobe.dashboard module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell"><code class="docutils literal notranslate"><span class="pre">Cell</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.info"><code class="docutils literal notranslate"><span class="pre">Cell.info</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.procedure"><code class="docutils literal notranslate"><span class="pre">Cell.procedure</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.check_and_set_name"><code class="docutils literal notranslate"><span class="pre">Cell.check_and_set_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.process_cycler_file"><code class="docutils literal notranslate"><span class="pre">Cell.process_cycler_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.process_generic_file"><code class="docutils literal notranslate"><span class="pre">Cell.process_generic_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.add_procedure"><code class="docutils literal notranslate"><span class="pre">Cell.add_procedure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.import_pybamm_solution"><code class="docutils literal notranslate"><span class="pre">Cell.import_pybamm_solution()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.Cell.archive"><code class="docutils literal notranslate"><span class="pre">Cell.archive()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.load_archive"><code class="docutils literal notranslate"><span class="pre">load_archive()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.cell.make_cell_list"><code class="docutils literal notranslate"><span class="pre">make_cell_list()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/pyprobe.cell.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Thomas Holland, Electrochemical Science and Engineering Group, Imperial College London.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

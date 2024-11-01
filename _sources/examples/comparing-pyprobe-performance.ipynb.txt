@@ -1,0 +1,371 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Comparing PyProBE Performance\n",
+    "\n",
+    "This example will demonstrate the performance benefits of PyProBE against Pandas, a popular library for dataframes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pyprobe\n",
+    "import pandas as pd\n",
+    "import polars as pl\n",
+    "import timeit\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import os\n",
+    "\n",
+    "%matplotlib inline"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Setting up data analysis in PyProBE requires conversion into the PyProBE format. This is normally the most time-intensive process, but only needs to be performed once."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "info_dictionary = {'Name': 'Sample cell',\n",
+    "                   'Chemistry': 'NMC622',\n",
+    "                   'Nominal Capacity [Ah]': 0.04,\n",
+    "                   'Cycler number': 1,\n",
+    "                   'Channel number': 1,}\n",
+    "\n",
+    "cell = pyprobe.Cell(info =info_dictionary)\n",
+    "data_directory = '../../../tests/sample_data/neware'\n",
+    "# cell.process_cycler_file(cycler='neware',\n",
+    "#                         folder_path=data_directory,\n",
+    "#                         input_filename='sample_data_neware.xlsx',\n",
+    "#                         output_filename='sample_data_neware.parquet')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We will measure the time for PyProBE and Pandas to read from a parquet file and filter the data a few times. With PyProBE we can call the built-in filtering methods, whereas Pandas must perform the filtering manually."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def measure_pyprobe(repeats, file):\n",
+    "    steps = 5\n",
+    "    cumulative_time = np.zeros((steps,repeats))\n",
+    "    for repeat in range(repeats):\n",
+    "        start_time = timeit.default_timer()\n",
+    "        cell.procedure = {}\n",
+    "        cell.add_procedure(procedure_name='Sample',\n",
+    "                   folder_path = data_directory,\n",
+    "                   filename = file)\n",
+    "        cumulative_time[0, repeat] = timeit.default_timer() - start_time\n",
+    "        \n",
+    "        experiment = cell.procedure['Sample'].experiment('Break-in Cycles')\n",
+    "        cumulative_time[1, repeat] =timeit.default_timer() - start_time\n",
+    "        \n",
+    "        cycle = experiment.cycle(1)\n",
+    "        cumulative_time[2, repeat] =timeit.default_timer() - start_time\n",
+    "        \n",
+    "        step = cycle.discharge(0)\n",
+    "        cumulative_time[3, repeat] = timeit.default_timer() - start_time\n",
+    "\n",
+    "        time, voltage = step.get(\"Time [s]\", \"Voltage [V]\")\n",
+    "        cumulative_time[4, repeat] = timeit.default_timer() - start_time\n",
+    "        \n",
+    "    return cumulative_time, time, voltage\n",
+    "\n",
+    "\n",
+    "def measure_pandas(repeats, file, test_csv=True):\n",
+    "    steps = 5\n",
+    "    cumulative_time = np.zeros((steps,repeats))\n",
+    "    csv_time = np.zeros(repeats)\n",
+    "    for repeat in range(repeats):\n",
+    "        if test_csv:\n",
+    "            start_time = timeit.default_timer()\n",
+    "            df = pd.read_csv(data_directory + '/' + str.replace(file, '.parquet', '.csv'))\n",
+    "            csv_time[repeat]= timeit.default_timer() - start_time\n",
+    "        start_time = timeit.default_timer()\n",
+    "        df = pd.read_parquet(data_directory + '/' + file)\n",
+    "        # Add a column to identify the cycle number\n",
+    "        df['Cycle'] = (\n",
+    "            (df['Step'].astype(int) - df['Step'].astype(int).shift() < 0)\n",
+    "            .fillna(0)\n",
+    "            .cumsum()\n",
+    "        )\n",
+    "        cumulative_time[0, repeat] = timeit.default_timer() - start_time\n",
+    "\n",
+    "        experiment = df[df['Step'].isin([4, 5, 6, 7])]\n",
+    "        cumulative_time[1, repeat] = timeit.default_timer() - start_time\n",
+    "\n",
+    "        unique_cycles = experiment['Cycle'].unique()\n",
+    "        \n",
+    "        cycle = experiment[experiment['Cycle'] == unique_cycles[1]]\n",
+    "        cumulative_time[2, repeat] =timeit.default_timer() - start_time\n",
+    "        \n",
+    "        step = cycle[cycle['Current [A]'] < 0]\n",
+    "        unique_events = step['Event'].unique()\n",
+    "        step = step[step['Event'] == unique_events[0]]\n",
+    "        cumulative_time[3, repeat] =timeit.default_timer() - start_time\n",
+    "\n",
+    "        voltage = step['Voltage [V]'].values\n",
+    "        time = step['Time [s]'].values\n",
+    "        cumulative_time[4, repeat] = timeit.default_timer() - start_time\n",
+    "    \n",
+    "    return cumulative_time, csv_time, time, voltage\n",
+    "\n",
+    "def make_boxplots(total_time_pyprobe, total_time_pandas, log_scale = False):\n",
+    "    # Create labels for the boxplots\n",
+    "    labels = [\"1: Read file\", \"2: Select experiment\", \"3: Select cycle\", \"4: Select step\", \"5: Return voltage\"]\n",
+    "    # Create the subplots\n",
+    "    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), sharey=True)\n",
+    "\n",
+    "    # Boxplot for pyprobe\n",
+    "    ax1.boxplot(total_time_pyprobe.T, tick_labels=labels, vert=True, patch_artist=True, showfliers=False)\n",
+    "    ax1.set_title('PyProBE Execution Time')\n",
+    "    ax1.set_ylabel('Cumulative Time (seconds)')\n",
+    "    if log_scale:\n",
+    "        ax1.set_yscale('log')\n",
+    "\n",
+    "    # Boxplot for Pandas\n",
+    "    ax2.boxplot(total_time_pandas.T, tick_labels=labels, vert=True, patch_artist=True, showfliers=False)\n",
+    "    ax2.set_title('Pandas Execution Time')\n",
+    "    ax2.yaxis.set_visible(False)  # Remove y-axis on the right-hand subplot\n",
+    "\n",
+    "    # Adjust layout\n",
+    "    plt.tight_layout()\n",
+    "    plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Running the tests shows the initial overhead for PyProBE to read and filter the data is zero. This is because of the Lazy implementation where all the computation is delayed until the final request for data is made. Overall, it is faster than Pandas as the pyprobe backend is able to optimize the filtering process, instead of requiring filters to be performed one-by-one."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "repeats = 100\n",
+    "total_time_pyprobe, pyprobe_time, pyprobe_voltage  = measure_pyprobe(repeats, 'sample_data_neware.parquet')\n",
+    "total_time_pandas, csv_time_pandas, pandas_time, pandas_voltage = measure_pandas(repeats, 'sample_data_neware.parquet')\n",
+    "make_boxplots(total_time_pyprobe, total_time_pandas)\n",
+    "\n",
+    "median_total_time_idx_pyprobe = np.argsort(total_time_pyprobe[-1,:])[total_time_pyprobe.shape[1] // 2]\n",
+    "median_total_time_idx_pandas = np.argsort(total_time_pandas[-1,:])[total_time_pandas.shape[1] // 2]\n",
+    "\n",
+    "median_total_time_pyprobe = total_time_pyprobe[:, median_total_time_idx_pyprobe]\n",
+    "median_total_time_pandas = total_time_pandas[:, median_total_time_idx_pandas]\n",
+    "\n",
+    "print(f\"The median execution time for the filtering query in PyProBE is {median_total_time_pandas[-1]/median_total_time_pyprobe[-1]:.2f} times faster than Pandas.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Confirm that the same data has been retrieved:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "assert np.allclose(pyprobe_voltage, pandas_voltage)\n",
+    "\n",
+    "plt.figure(figsize=(10, 6))\n",
+    "plt.plot(pyprobe_time, pyprobe_voltage, label='PyProBE')\n",
+    "plt.plot(pandas_time, pandas_voltage, label='Pandas')\n",
+    "plt.xlabel('Time [s]')\n",
+    "plt.ylabel('Voltage [V]')\n",
+    "plt.legend()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Much of the performance behind PyProBE is careful selection of the data file format. PyProBE uses the .parquet file format due to its exceptional speed. The results above show pandas reading from the parquet format. The below plot illustrates its performance benefit:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure()\n",
+    "plt.boxplot([csv_time_pandas, total_time_pyprobe[-1,:]], tick_labels=['Read from .csv', 'Read from .parquet'], vert=True, patch_artist=True, showfliers=False)\n",
+    "plt.ylabel('Time (seconds)')\n",
+    "plt.show()\n",
+    "\n",
+    "average_difference = np.median(csv_time_pandas)/np.median(total_time_pyprobe[-1,:])\n",
+    "print(f\"Reading from .parquet is on average {average_difference:.2f} times faster than reading from .csv\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The sample dataset is not large, covering only around a week of testing. Battery degradation experiments can last for years, so the test below demonstrates the scalability of PyProBE to large data sets. We will now repeat our battery experiment multiple times and save the new dataset:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Read the original data from the Parquet file\n",
+    "data = pl.read_parquet(data_directory + '/sample_data_neware.parquet')\n",
+    "\n",
+    "# Repeat the data \n",
+    "n_repeats = 12\n",
+    "repeated_data = pl.concat([data] * n_repeats)\n",
+    "\n",
+    "# Repeat the 'Cycle' and 'Event' columns to match the length of the repeated data\n",
+    "event_repeated = pl.concat([data['Event']] * n_repeats)\n",
+    "step_repeated = pl.concat([data['Step']] * n_repeats)\n",
+    "time_repeated = pl.concat([data['Time [s]']]* n_repeats)\n",
+    "\n",
+    "# Increment the 'Cycle' and 'Event' columns\n",
+    "event_increment = data['Event'].max() + 1\n",
+    "step_increment = data['Step'].max() + 1\n",
+    "time_increment = data['Time [s]'].max()\n",
+    "\n",
+    "\n",
+    "repeated_data = repeated_data.with_columns([\n",
+    "    # (pl.arange(0, len(repeated_data)) // len(data) * cycle_increment + cycle_repeated).alias('Cycle'),\n",
+    "    (pl.arange(0, len(repeated_data)) // len(data) * event_increment + event_repeated).alias('Event'),\n",
+    "    (pl.arange(0, len(repeated_data)) // len(data) * event_increment + step_repeated).alias('Step'),\n",
+    "    (pl.arange(0, len(repeated_data)) // len(data) * time_increment + time_repeated).alias('Time [s]'),\n",
+    "])\n",
+    "\n",
+    "# Write the repeated data to a new Parquet file\n",
+    "repeated_data.write_parquet(data_directory + '/sample_data_neware_repeated.parquet')\n",
+    "\n",
+    "# plot the repeated data\n",
+    "plt.figure(figsize=(10, 6))\n",
+    "plt.plot(repeated_data['Time [s]']/3600/24, repeated_data['Voltage [V]'], label='Repeated data', color='blue')\n",
+    "plt.plot(data['Time [s]']/3600/24, data['Voltage [V]'], label='Original data', color='red')\n",
+    "plt.xlabel('Days')\n",
+    "plt.ylabel('Voltage [V]')\n",
+    "plt.legend(loc = 'upper right')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "And re-run the test:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "repeats = 100\n",
+    "rep_total_time_pyprobe, rep_pyprobe_time, rep_pyprobe_voltage = measure_pyprobe(repeats, 'sample_data_neware_repeated.parquet')\n",
+    "rep_total_time_pandas, rep_csv_time_pandas, rep_pandas_time, rep_pandas_voltage = measure_pandas(repeats, 'sample_data_neware_repeated.parquet', test_csv=False)\n",
+    "\n",
+    "rep_median_total_time_idx_pyprobe = np.argsort(rep_total_time_pyprobe[-1,:])[rep_total_time_pyprobe.shape[1] // 2]\n",
+    "rep_median_total_time_idx_pandas = np.argsort(rep_total_time_pandas[-1,:])[rep_total_time_pandas.shape[1] // 2]\n",
+    "\n",
+    "rep_median_total_time_pyprobe = rep_total_time_pyprobe[:, rep_median_total_time_idx_pyprobe]\n",
+    "rep_median_total_time_pandas = rep_total_time_pandas[:, rep_median_total_time_idx_pandas]\n",
+    "\n",
+    "os.remove(data_directory + '/sample_data_neware_repeated.parquet')\n",
+    "\n",
+    "print(f\"The median execution time for the filtering query in PyProBE is {rep_median_total_time_pandas[-1]/rep_median_total_time_pyprobe[-1]:.2f} times faster than Pandas.\")\n",
+    "\n",
+    "plt.figure(figsize=(10, 7.5))\n",
+    "plt.plot(median_total_time_pyprobe, label='PyProBE - 1 week of data', marker='o', color='red')\n",
+    "plt.plot(rep_median_total_time_pyprobe, label=f'PyProBE - {n_repeats} weeks of data', marker='o', linestyle='--', color='red')\n",
+    "plt.plot(median_total_time_pandas, label='Pandas - 1 week of data', marker='o', color='blue')\n",
+    "plt.plot(rep_median_total_time_pandas, label=f'Pandas - {n_repeats} weeks of data', marker='o', linestyle='--', color='blue')\n",
+    "plt.yscale('log')\n",
+    "plt.xticks(range(5), [\"Read file\", \"Select experiment\", \"Select cycle\", \"Select step\", \"Return voltage\"], fontsize=14)\n",
+    "plt.yticks(fontsize=12)\n",
+    "plt.legend(bbox_to_anchor=(1, 1), fontsize=12)\n",
+    "plt.ylabel('Cumulative Time of Median Query (seconds)', fontsize=14)\n",
+    "\n",
+    "data = {\n",
+    "    'Period': [\"1 week\", f\"{n_repeats} weeks\", 'Increase Factor'],\n",
+    "    'PyProBE': [median_total_time_pyprobe[-1], rep_median_total_time_pyprobe[-1], rep_median_total_time_pyprobe[-1] / median_total_time_pyprobe[-1]],\n",
+    "    'Pandas': [median_total_time_pandas[-1], rep_median_total_time_pandas[-1], rep_median_total_time_pandas[-1] / median_total_time_pandas[-1]]}\n",
+    "\n",
+    "print(\"Execution time breakdown:\")\n",
+    "df = pd.DataFrame(data)\n",
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Confirm that the same data has been retrieved:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "assert np.allclose(rep_pyprobe_voltage, rep_pandas_voltage)\n",
+    "\n",
+    "plt.figure(figsize=(10, 6))\n",
+    "plt.plot(rep_pyprobe_time, rep_pyprobe_voltage, label='PyProBE')\n",
+    "plt.plot(rep_pandas_time, rep_pandas_voltage, label='Pandas')\n",
+    "plt.xlabel('Time [s]')\n",
+    "plt.ylabel('Voltage [V]')\n",
+    "plt.legend()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "pyprobe-dev",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
