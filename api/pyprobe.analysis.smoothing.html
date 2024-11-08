@@ -399,6 +399,109 @@ document.write(`
   <section id="module-pyprobe.analysis.smoothing">
 <span id="pyprobe-analysis-smoothing-module"></span><h1>pyprobe.analysis.smoothing module<a class="headerlink" href="#module-pyprobe.analysis.smoothing" title="Link to this heading">#</a></h1>
 <p>Module containing methods for smoothing noisy experimental data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.linear_interpolator">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">linear_interpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.linear_interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Create a linear interpolator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The x data.</p></li>
+<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The y data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The linear interpolator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[NDArray[np.float64]], NDArray[np.float64]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.cubic_interpolator">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">cubic_interpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.cubic_interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Create a Scipy cubic spline interpolator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The x data.</p></li>
+<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The y data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cubic spline interpolator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[NDArray[np.float64]], NDArray[np.float64]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.pchip_interpolator">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">pchip_interpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.pchip_interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Create a Scipy Pchip interpolator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The x data.</p></li>
+<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The y data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Pchip interpolator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[NDArray[np.float64]], NDArray[np.float64]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.akima_interpolator">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">akima_interpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.akima_interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Create a Scipy Akima interpolator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The x data.</p></li>
+<li><p><strong>y</strong> (<em>NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – The y data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Akima interpolator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[NDArray[np.float64]], NDArray[np.float64]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.downsample_data">
+<span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">downsample_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occurrence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'first'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time</span> <span class="pre">[s]'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.downsample_data" title="Link to this definition">#</a></dt>
+<dd><p>Resample a DataFrame to a specified interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pl.DataFrame</em><em> | </em><em>pl.LazyFrame</em>) – The DataFrame to downsample.</p></li>
+<li><p><strong>target</strong> (<em>str</em>) – The target column to downsample.</p></li>
+<li><p><strong>sampling_interval</strong> (<em>float</em>) – The desired minimum interval between points.</p></li>
+<li><p><strong>occurrence</strong> (<em>Literal</em><em>[</em><em>'first'</em><em>, </em><em>'last'</em><em>, </em><em>'middle'</em><em>]</em><em>, </em><em>optional</em>) – The occurrence to take when downsampling. Default is ‘first’.</p></li>
+<li><p><strong>time_column</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The downsampled DataFrame.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pl.DataFrame | pl.LazyFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class pydantic_model">
 <dt class="sig sig-object py" id="pyprobe.analysis.smoothing.Smoothing">
 <em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyprobe.analysis.smoothing.</span></span><span class="sig-name descname"><span class="pre">Smoothing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.Smoothing" title="Link to this definition">#</a></dt>
@@ -437,6 +540,29 @@ Default is “Time [s]”.</p></li>
 <dd class="field-even"><p>A result object containing the data from input data with the target
 column smoothed using a spline, and the gradient of the smoothed data
 with respect to the x variable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="pyprobe.result.html#pyprobe.result.Result" title="pyprobe.result.Result">Result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyprobe.analysis.smoothing.Smoothing.downsample">
+<span class="sig-name descname"><span class="pre">downsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occurrence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'first'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time</span> <span class="pre">[s]'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyprobe.analysis.smoothing.Smoothing.downsample" title="Link to this definition">#</a></dt>
+<dd><p>Downsample a DataFrame to a specified interval.</p>
+<p>Requires the target column to be monotonic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_column</strong> (<em>str</em>) – The target column to downsample.</p></li>
+<li><p><strong>sampling_interval</strong> (<em>float</em>) – The desired minimum interval between points.</p></li>
+<li><p><strong>occurrence</strong> (<em>Literal</em><em>[</em><em>'first'</em><em>, </em><em>'last'</em><em>, </em><em>'middle'</em><em>]</em><em>, </em><em>optional</em>) – The occurrence to take when downsampling. Default is ‘first’.</p></li>
+<li><p><strong>time_column</strong> (<em>str</em><em>, </em><em>optional</em>) – The time column to use for downsampling. Default is ‘Time [s]’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A result object containing the downsampled DataFrame.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="pyprobe.result.html#pyprobe.result.Result" title="pyprobe.result.Result">Result</a></p>
@@ -540,9 +666,15 @@ using the Savitzky-Golay filter.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.linear_interpolator"><code class="docutils literal notranslate"><span class="pre">linear_interpolator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.cubic_interpolator"><code class="docutils literal notranslate"><span class="pre">cubic_interpolator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.pchip_interpolator"><code class="docutils literal notranslate"><span class="pre">pchip_interpolator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.akima_interpolator"><code class="docutils literal notranslate"><span class="pre">akima_interpolator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.downsample_data"><code class="docutils literal notranslate"><span class="pre">downsample_data()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing"><code class="docutils literal notranslate"><span class="pre">Smoothing</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing.input_data"><code class="docutils literal notranslate"><span class="pre">Smoothing.input_data</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing.spline_smoothing"><code class="docutils literal notranslate"><span class="pre">Smoothing.spline_smoothing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing.downsample"><code class="docutils literal notranslate"><span class="pre">Smoothing.downsample()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing.level_smoothing"><code class="docutils literal notranslate"><span class="pre">Smoothing.level_smoothing()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyprobe.analysis.smoothing.Smoothing.savgol_smoothing"><code class="docutils literal notranslate"><span class="pre">Smoothing.savgol_smoothing()</span></code></a></li>
 </ul>

@@ -406,21 +406,21 @@ method. So, when <a class="reference internal" href="../api/pyprobe.analysis.deg
 it saves this result in <cite>stoichiometry_limits</cite> for use later. If they are required,
 these attributes must also be defined at the top of the class.</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># 1. Define the class as a Pydantic BaseModel.</span>
-<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">DMA</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="linenos"> 3</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for degradation mode analysis methods.&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">pyprobe.analysis.utils</span> <span class="kn">import</span> <span class="n">AnalysisValidator</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pyprobe.result</span> <span class="kn">import</span> <span class="n">Result</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">pyprobe.typing</span> <span class="kn">import</span> <span class="n">FilterToCycleType</span><span class="p">,</span> <span class="n">PyProBEDataType</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>    <span class="c1"># 2. Define the input_data attribute, giving it a type</span>
-<span class="linenos"> 6</span>    <span class="n">input_data</span><span class="p">:</span> <span class="n">PyProBEDataType</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;The input data for the degradation mode analysis.&quot;&quot;&quot;</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span>    <span class="c1"># 3. Define the attributes that will be populated by the methods.</span>
-<span class="linenos">10</span>    <span class="n">stoichiometry_limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Result</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">11</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;The stoichiometry limits and electrode capacities.&quot;&quot;&quot;</span>
-<span class="linenos">12</span>    <span class="n">fitted_OCV</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Result</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">13</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;The fitted OCV data.&quot;&quot;&quot;</span>
-<span class="linenos">14</span>    <span class="n">dma_result</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Result</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">15</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;The degradation mode analysis results.&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># 1. Define the class as a Pydantic BaseModel.</span>
+<span class="linenos"> 7</span><span class="k">class</span> <span class="nc">DMA</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for degradation mode analysis methods.&quot;&quot;&quot;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="c1"># 2. Define the input_data attribute, giving it a type</span>
+<span class="linenos">11</span>    <span class="n">input_data</span><span class="p">:</span> <span class="n">PyProBEDataType</span>
+<span class="linenos">12</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;The input data for the degradation mode analysis.&quot;&quot;&quot;</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="c1"># 3. Define the attributes that will be populated by the methods.</span>
+<span class="linenos">15</span>    <span class="n">stoichiometry_limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Result</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <p>Then you can add any additional methods to perform your calculations.</p>
